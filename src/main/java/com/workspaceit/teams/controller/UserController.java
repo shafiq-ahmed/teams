@@ -24,7 +24,13 @@ public class UserController {
     }
     @PostMapping("/sendMail/{userMail}")
     public ResponseEntity sendMail(VerificationData verificationData, @PathVariable String userMail){
-        verificationService.sendMail(verificationData,userMail);
-        return ResponseEntity.ok("User Created");
+
+        return ResponseEntity.ok(verificationService.sendMail(verificationData,userMail));
+    }
+
+    @PostMapping("/register/{verificationCode}")
+    public ResponseEntity registerUser(String password, @PathVariable String verificationCode){
+        userService.registerUser(password,verificationCode);
+        return ResponseEntity.ok("User created");
     }
 }

@@ -5,6 +5,7 @@ import com.workspaceit.teams.entity.User;
 import com.workspaceit.teams.entity.VerificationData;
 import com.workspaceit.teams.repo.UserRepo;
 import com.workspaceit.teams.repo.VerificationDataRepo;
+import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,19 +20,18 @@ public class VerificationService {
     @Autowired
     private UserRepo userRepo;
 
-    public void sendMail(VerificationData verificationData, String userMail){
+    public String sendMail(VerificationData verificationData, String userMail){
         User user= userRepo.findByEmail(userMail);
         verificationData.setSenderMail(user);
 
         verificationData.setVerificationCode(getRandomCode());
         verificationData.setStatus(InviteStatus.PENDING);
         verificationDataRepo.save(verificationData);
+        String registrationLink="http://localhost:9090/register/"+verificationData.getVerificationCode();
+        return registrationLink;
     }
 
     public String getRandomCode(){
-        byte[] array = new byte[4];
-        new Random().nextBytes(array);
-
-        return new String(array, Charset.forName("UTF-8"));
+        return RandomString.make(4);
     }
 }
