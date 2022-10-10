@@ -1,16 +1,24 @@
 package com.workspaceit.teams.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity(name = "verification_table")
 public class VerificationData {
     @Id
     private String verificationCode;
     private String receiverMail;
+    @Enumerated(EnumType.ORDINAL)
+    private InviteStatus status;
     @ManyToOne
     private User senderMail;
+
+    public InviteStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(InviteStatus status) {
+        this.status = status;
+    }
 
     public String getVerificationCode() {
         return verificationCode;
