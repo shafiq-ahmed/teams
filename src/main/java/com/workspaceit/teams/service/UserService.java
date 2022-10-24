@@ -1,6 +1,7 @@
 package com.workspaceit.teams.service;
 
 import com.workspaceit.teams.entity.User;
+import com.workspaceit.teams.entity.UserType;
 import com.workspaceit.teams.entity.VerificationData;
 import com.workspaceit.teams.repo.UserRepo;
 import com.workspaceit.teams.repo.VerificationDataRepo;
@@ -17,10 +18,12 @@ public class UserService {
      private VerificationDataRepo verificationDataRepo;
 
     public void addUser(User user){
+        user.setType(UserType.USER);
         userRepo.save(user);
     }
 
     public void registerUser(String password, String verificationCode){
+       // VerificationData verificationData= verificationDataRepo.findByVerificationCode(verificationCode);
         VerificationData verificationData= verificationDataRepo.findByVerificationCode(verificationCode);
         User user= new User();
         user.setEmail(verificationData.getReceiverMail());

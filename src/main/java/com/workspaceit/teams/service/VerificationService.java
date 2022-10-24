@@ -21,7 +21,7 @@ public class VerificationService {
     private UserRepo userRepo;
 
     public String sendMail(VerificationData verificationData, String userMail){
-        User user= userRepo.findByEmail(userMail);
+        User user= userRepo.getReferenceById(userMail);
         verificationData.setSenderMail(user);
 
         verificationData.setVerificationCode(getRandomCode());
