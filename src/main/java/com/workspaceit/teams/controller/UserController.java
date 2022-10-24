@@ -33,4 +33,19 @@ public class UserController {
         userService.registerUser(password,verificationCode);
         return ResponseEntity.ok("User created");
     }
+
+    @PostMapping("/addUser/{userMail}")
+    public void getUser(@PathVariable String userMail){
+        userService.getUser(userMail);
+    }
+
+    @PostMapping("/addUser2/{receiverMail}")
+    public void getUser(@PathVariable String receiverMail, User user){
+        verificationService.getEntity(receiverMail,user);
+    }
+
+    @PostMapping("/addUser2/{receiverMail}/{senderMail}")
+    public void getUser(@PathVariable String receiverMail, @PathVariable String senderMail){
+        verificationService.getEntityFromId(receiverMail,senderMail);
+    }
 }

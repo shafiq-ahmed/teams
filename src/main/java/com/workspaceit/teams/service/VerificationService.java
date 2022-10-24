@@ -34,4 +34,11 @@ public class VerificationService {
     public String getRandomCode(){
         return RandomString.make(4);
     }
+    public void getEntity(String receiverMail, User senderMail){
+       // verificationDataRepo.findByReceiverMailAndSenderMail(receiverMail,senderMail);
+    }
+
+    public void getEntityFromId(String receiverMail, String senderMail){
+        verificationDataRepo.findByReceiverMailAndSenderMailEmail(receiverMail,senderMail);
+    }
 }

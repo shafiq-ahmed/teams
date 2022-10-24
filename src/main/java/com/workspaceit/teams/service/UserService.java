@@ -27,4 +27,8 @@ public class UserService {
         user.setPassword(password);
         userRepo.save(user);
     }
+
+    public void getUser(String userMail){
+        userRepo.getReferenceById(userMail);
+    }
 }

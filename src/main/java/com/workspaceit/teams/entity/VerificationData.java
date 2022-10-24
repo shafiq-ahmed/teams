@@ -1,15 +1,18 @@
 package com.workspaceit.teams.entity;
 
+import com.sun.istack.Nullable;
+
 import javax.persistence.*;
 
-@Entity(name = "verification_table")
+@Entity(name = "verification_table_2")
 public class VerificationData {
     @Id
     private String verificationCode;
     private String receiverMail;
     @Enumerated(EnumType.ORDINAL)
     private InviteStatus status;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY,optional = false)
     private User senderMail;
 
     public InviteStatus getStatus() {

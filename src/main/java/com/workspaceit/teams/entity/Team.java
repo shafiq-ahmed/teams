@@ -1,18 +1,13 @@
 package com.workspaceit.teams.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
-@Entity(name = "team_table")
+@Entity(name = "teams_table")
 public class Team {
     @Id
     private int id;
-    @ManyToOne
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
     private User host;
-    @OneToOne
-    private User guest;
 
     public int getId() {
         return id;
@@ -28,13 +23,5 @@ public class Team {
 
     public void setHost(User host) {
         this.host = host;
-    }
-
-    public User getGuest() {
-        return guest;
-    }
-
-    public void setGuest(User guest) {
-        this.guest = guest;
     }
 }
